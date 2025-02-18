@@ -1,7 +1,19 @@
 const express = require("express");
 const app = express();
+const path = require("node:path");
 
-app.get("/", (req, res) => res.send("Why hello there"));
+const gameRoutes = require("./routes/gameRoutes");
+// const developerRoutes = require("./routes/developerRoutes");
+// const genreRoutes = require("./routes/genreRoutes");
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+// app.use(express.urlencoded({ extended: true }));
+
+app.use("/games", gameRoutes);
+// app.use("/", developerRoutes);
+// app.use("/", genreRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {
