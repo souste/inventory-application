@@ -1,5 +1,43 @@
+// will need number values and ${} for length, metaScore, userScore, price
+// array required for multiple genres?
+
+const games = [
+  {
+    name: "Grand Theft Auto 6",
+    length: "100 hours",
+    metaScore: "tbc",
+    userScore: "tbc",
+    price: "£70",
+    genre: "Open World, Action, Driving",
+  },
+  {
+    name: "Baldurs Gate 3",
+    length: "150 hours",
+    metaScore: 9.6,
+    userScore: 9.2,
+    price: "£70",
+    genre: "Fantasy",
+  },
+  {
+    name: "Elden Ring",
+    length: "150 hours",
+    metaScore: 9.6,
+    userScore: 8.2,
+    price: "£70",
+    genre: "Fantasy, Open World",
+  },
+  {
+    name: "Kingdom Come Deliverance 2",
+    length: "150 hours",
+    metaScore: 8.8,
+    userScore: 8.5,
+    price: "£70",
+    genre: "Fantasy, Open World",
+  },
+];
+
 const getAllGames = (req, res) => {
-  res.send("This is for all games");
+  res.render("games", { games: games });
 };
 
 const createGameGet = (req, res) => {
