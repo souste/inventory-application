@@ -13,7 +13,7 @@ app.set("view engine", "ejs");
 
 app.use("/games", gameRoutes);
 app.use("/developers", developerRoutes);
-app.use("/genre", genreRoutes);
+app.use("/genres", genreRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {

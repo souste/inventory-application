@@ -1,5 +1,32 @@
+const developers = [
+  {
+    id: 1,
+    name: "Rockstar",
+    founded: 1998,
+    games: "Harcoded - GTA5, RDR2",
+  },
+  {
+    id: 2,
+    name: "Larian Studios",
+    founded: 1996,
+    games: "Baldurs Gate 3",
+  },
+  {
+    id: 3,
+    name: "FromSoftware",
+    founded: 1986,
+    games: "Elden Ring",
+  },
+  {
+    id: 4,
+    name: "Warhorse Studios",
+    founded: 2011,
+    games: "Kingdom Come Deliverance 2",
+  },
+];
+
 const getAllDevelopers = (req, res) => {
-  res.send("This is for all Developers");
+  res.render("developers", { developers: developers });
 };
 
 const createDeveloperGet = (req, res) => {

@@ -3,6 +3,7 @@
 
 const games = [
   {
+    id: 1,
     name: "Grand Theft Auto 6",
     length: "100 hours",
     metaScore: "tbc",
@@ -11,6 +12,7 @@ const games = [
     genre: "Open World, Action, Driving",
   },
   {
+    id: 2,
     name: "Baldurs Gate 3",
     length: "150 hours",
     metaScore: 9.6,
@@ -19,6 +21,7 @@ const games = [
     genre: "Fantasy",
   },
   {
+    id: 3,
     name: "Elden Ring",
     length: "150 hours",
     metaScore: 9.6,
@@ -27,6 +30,7 @@ const games = [
     genre: "Fantasy, Open World",
   },
   {
+    id: 4,
     name: "Kingdom Come Deliverance 2",
     length: "150 hours",
     metaScore: 8.8,

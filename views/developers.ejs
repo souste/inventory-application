@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Developers</title>
+  </head>
+  <body>
+    <h1>Developers</h1>
+    <a href="/developers/create">New Developer</a>
+    <ul>
+      <% for (let i = 0; i < developers.length; i++) { %>
+      <li>
+        <h3><%= developers[i].name %></h3>
+        <p>Founded: <%= developers[i].founded %></p>
+        <p>Games: <%= developers[i].games %></p>
+      </li>
+      <% } %>
+    </ul>
+  </body>
+</html>

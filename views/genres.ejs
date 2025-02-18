@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Genres</title>
+  </head>
+  <body>
+    <h1>Genres</h1>
+    <a href="/developers/genres">New Genre</a>
+    <ul>
+      <% for (let i = 0; i < genres.length; i++) { %>
+      <li>
+        <h3><%= genres[i].name %></h3>
+        <p>Games: <%= genres[i].description %></p>
+        <p>Games: <%= genres[i].games %></p>
+      </li>
+      <% } %>
+    </ul>
+  </body>
+</html>
