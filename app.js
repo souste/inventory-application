@@ -3,8 +3,8 @@ const app = express();
 const path = require("node:path");
 
 const gameRoutes = require("./routes/gameRoutes");
-// const developerRoutes = require("./routes/developerRoutes");
-// const genreRoutes = require("./routes/genreRoutes");
+const developerRoutes = require("./routes/developerRoutes");
+const genreRoutes = require("./routes/genreRoutes");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -12,8 +12,8 @@ app.set("view engine", "ejs");
 // app.use(express.urlencoded({ extended: true }));
 
 app.use("/games", gameRoutes);
-// app.use("/", developerRoutes);
-// app.use("/", genreRoutes);
+app.use("/developers", developerRoutes);
+app.use("/genre", genreRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {

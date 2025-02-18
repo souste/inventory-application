@@ -2,11 +2,11 @@ const getAllGames = (req, res) => {
   res.send("This is for all games");
 };
 
-const createUsernameGet = (req, res) => {
+const createGameGet = (req, res) => {
   res.send("This will take me to the Game Create Form");
 };
 
-const createUserPost = (req, res) => {
+const createGamePost = (req, res) => {
   res.send("This should post the new game");
 };
 
@@ -22,7 +22,7 @@ const editSingleGame = (req, res) => {
 
 const deleteSingleGame = (req, res) => {
   const gameId = req.params.id;
-  res.send(`This will delete game single ID: ${gameId}`);
+  res.send(`This will delete game with ID: ${gameId}`);
 };
 
-module.exports = { getAllGames, createUsernameGet, createUserPost, getSingleGame, editSingleGame, deleteSingleGame };
+module.exports = { getAllGames, createGameGet, createGamePost, getSingleGame, editSingleGame, deleteSingleGame };
