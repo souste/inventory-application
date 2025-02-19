@@ -1,5 +1,4 @@
-// will need number values and ${} for length, metaScore, userScore, price
-// array required for multiple genres?
+// const pool = require("../bd/pool");
 
 const games = [
   {
