@@ -11,10 +11,8 @@
       <li>
         <h3><%= games[i].name %></h3>
         <p>Length: <%= games[i].length %></p>
-        <p>Metascore: <%= games[i].metaScore %></p>
-        <p>User Score: <%= games[i].userScore %></p>
         <p>Price: <%= games[i].price %></p>
-        <p>Genre: <%= games[i].genre %></p>
+        <a href="/games/<%= i %>"><button>Open</button></a>
       </li>
       <% } %>
     </ul>

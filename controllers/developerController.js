@@ -39,7 +39,8 @@ const createDeveloperPost = (req, res) => {
 
 const getSingleDeveloper = (req, res) => {
   const developerId = req.params.id;
-  res.send(`This is for Developer with  ID: ${developerId}`);
+  const developer = developers[developerId];
+  res.render("singleDeveloper", { developer: developer });
 };
 
 const editSingleDeveloper = (req, res) => {

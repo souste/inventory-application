@@ -39,7 +39,8 @@ const createGenrePost = (req, res) => {
 
 const getSingleGenre = (req, res) => {
   const genreId = req.params.id;
-  res.send(`This is for Genre with  ID: ${genreId}`);
+  const genre = genres[genreId];
+  res.render("singleGenre", { genre: genre });
 };
 
 const editSingleGenre = (req, res) => {

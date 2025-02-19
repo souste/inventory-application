@@ -54,7 +54,8 @@ const createGamePost = (req, res) => {
 
 const getSingleGame = (req, res) => {
   const gameId = req.params.id;
-  res.send(`This is for game with  ID: ${gameId}`);
+  const game = games[gameId];
+  res.render("singleGame", { game: game });
 };
 
 const editSingleGame = (req, res) => {
