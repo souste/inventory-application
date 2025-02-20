@@ -10,9 +10,9 @@
       <% for (let i = 0; i < games.length; i++) { %>
       <li>
         <h3><%= games[i].name %></h3>
-        <p>Length: <%= games[i].length %></p>
-        <p>Price: <%= games[i].price %></p>
-        <a href="/games/<%= i %>"><button>Open</button></a>
+        <p>Length: <%= games[i].length %> hours</p>
+        <p>Price: £<%= games[i].price %></p>
+        <a href="/games/<%= games[i].id %>"><button>Open</button></a>
       </li>
       <% } %>
     </ul>

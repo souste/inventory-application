@@ -1,4 +1,4 @@
-// const pool = require("../bd/pool");
+const pool = require("../db/pool");
 
 const games = [
   {
@@ -39,8 +39,14 @@ const games = [
   },
 ];
 
-const getAllGames = (req, res) => {
-  res.render("games", { games: games });
+const getAllGames = async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM games");
+    res.render("games", { games: result.rows });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error");
+  }
 };
 
 const createGameGet = (req, res) => {
