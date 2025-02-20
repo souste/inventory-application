@@ -57,10 +57,21 @@ const createGamePost = (req, res) => {
   res.send("This should post the new game");
 };
 
-const getSingleGame = (req, res) => {
-  const gameId = req.params.id;
-  const game = games[gameId];
-  res.render("singleGame", { game: game });
+const getSingleGame = async (req, res) => {
+  const gameId = parseInt(req.params.id, 10);
+  try {
+    const result = await pool.query("SELECT * FROM games WHERE id = $1", [gameId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).send("Game not found");
+    }
+
+    const game = result.rows[0];
+    res.render("singleGame", { game });
+  } catch (error) {
+    console.error("Error fetching game:", error);
+    res.status(500).send("Server Error");
+  }
 };
 
 const editSingleGame = (req, res) => {
