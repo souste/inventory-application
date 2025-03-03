@@ -4,6 +4,7 @@ const gameController = require("../controllers/gameController");
 const gameRouter = Router();
 
 gameRouter.get("/", gameController.getAllGames);
+gameRouter.get("/genres/:id", gameController.getGamesByGenre);
 gameRouter.get("/create", gameController.createGameGet);
 gameRouter.post("/create", gameController.createGamePost);
 gameRouter.get("/:id", gameController.getSingleGame);
