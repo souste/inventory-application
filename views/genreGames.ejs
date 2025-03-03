@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Single Game</title>
+    <title>Single Genre</title>
   </head>
   <body>
-    <h1><%= game.name %></h1>
-    <p>Length: <%= game.length %></p>
-    <p>Metascore: <%= game.meta_score %></p>
-    <p>User Score: <%= game.user_score %></p>
-    <p>Price: <%= game.price %></p>
-    <p>Genre: <%= game.genre %></p>
-    <a href="/games/"><button>Back</button></a>
+    <p>This will list all the games in this specific genre</p>
+    <ul>
+      <% for (let i=0; i < games.length; i++) { %>
+      <li>
+        <h3><%= games[i].name %></h3>
+        <p>Length: <%= games[i].length %> hours</p>
+        <p>Price: £<%= games[i].price %></p>
+        <a href="/games/<%= games[i].id %>"><button>Open</button></a>
+      </li>
+
+      <% } %>
+    </ul>
   </body>
 </html>

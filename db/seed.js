@@ -26,6 +26,18 @@ const seedDB = async () => {
             ('Driving', 'Racing, driving around in a car'),
             ('Action', 'Hacking and Slashing');
             `);
+    await pool.query(`
+  INSERT INTO game_genres (game_id, genre_id)
+  VALUES
+  (1, 2),
+  (1, 3),
+  (2, 1),
+  (3, 1),
+  (3, 4),
+  (4, 1),
+  (4, 4)
+  `);
+
     console.log("Database Successfully Seeded");
   } catch (err) {
     console.error(err);
