@@ -4,6 +4,7 @@
     <title>Developers</title>
   </head>
   <body>
+    <%- include("navbar") %>
     <h1>Developers</h1>
     <a href="/developers/create">New Developer</a>
     <ul>
@@ -11,8 +12,7 @@
       <li>
         <h3><%= developers[i].name %></h3>
         <p>Founded: <%= developers[i].founded %></p>
-        <p>Games: <%= developers[i].games %></p>
-        <a href="/developers/<%= i %>"><button>Open</button></a>
+        <a href="/developers/<%= developers[i].id %>"><button>Open</button></a>
       </li>
       <% } %>
     </ul>

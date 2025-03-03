@@ -1,44 +1,5 @@
 const pool = require("../db/pool");
 
-const games = [
-  {
-    id: 1,
-    name: "Grand Theft Auto 6",
-    length: "100 hours",
-    metaScore: "tbc",
-    userScore: "tbc",
-    price: "£70",
-    genre: "Open World, Action, Driving",
-  },
-  {
-    id: 2,
-    name: "Baldurs Gate 3",
-    length: "150 hours",
-    metaScore: 9.6,
-    userScore: 9.2,
-    price: "£70",
-    genre: "Fantasy",
-  },
-  {
-    id: 3,
-    name: "Elden Ring",
-    length: "150 hours",
-    metaScore: 9.6,
-    userScore: 8.2,
-    price: "£70",
-    genre: "Fantasy, Open World",
-  },
-  {
-    id: 4,
-    name: "Kingdom Come Deliverance 2",
-    length: "150 hours",
-    metaScore: 8.8,
-    userScore: 8.5,
-    price: "£70",
-    genre: "Fantasy, Open World",
-  },
-];
-
 const getAllGames = async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM games");

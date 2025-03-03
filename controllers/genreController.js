@@ -1,32 +1,13 @@
-const genres = [
-  {
-    id: 1,
-    name: "Fantasy",
-    description: "Sword and Sorcery",
-    games: "Hardcoded - Elden Ring, Baldurs Gate",
-  },
-  {
-    id: 2,
-    name: "Open World",
-    description: "With world map, can go anywhere",
-    games: "Hardcoded - Elden Ring, Baldurs Gate, Grand Theft Auto 6",
-  },
-  {
-    id: 3,
-    name: "Driving",
-    description: "Car games",
-    games: "Grand Theft Auto 6",
-  },
-  {
-    id: 4,
-    name: "Action",
-    description: "Hacking and Slashing",
-    games: "Grand Theft Auto 6, Elden Ring",
-  },
-];
+const pool = require("../db/pool");
 
-const getAllGenres = (req, res) => {
-  res.render("genres", { genres: genres });
+const getAllGenres = async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM genres");
+    res.render("genres", { genres: result.rows });
+  } catch {
+    console.log(err);
+    res.status(500).send("Server Error");
+  }
 };
 
 const createGenreGet = (req, res) => {
@@ -37,10 +18,20 @@ const createGenrePost = (req, res) => {
   res.send("This should post the new Genre");
 };
 
-const getSingleGenre = (req, res) => {
+const getSingleGenre = async (req, res) => {
   const genreId = req.params.id;
-  const genre = genres[genreId];
-  res.render("singleGenre", { genre: genre });
+  try {
+    const result = await pool.query("SELECT * FROM genres WHERE id = $1", [genreId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).send("Genre not found");
+    }
+    const genre = result.rows[0];
+    res.render("singleGenre", { genre });
+  } catch (error) {
+    console.error("Error fetching genre", error);
+    res.status(500).send("Server Error");
+  }
 };
 
 const editSingleGenre = (req, res) => {

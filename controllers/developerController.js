@@ -1,32 +1,13 @@
-const developers = [
-  {
-    id: 1,
-    name: "Rockstar",
-    founded: 1998,
-    games: "Harcoded - GTA5, RDR2",
-  },
-  {
-    id: 2,
-    name: "Larian Studios",
-    founded: 1996,
-    games: "Baldurs Gate 3",
-  },
-  {
-    id: 3,
-    name: "FromSoftware",
-    founded: 1986,
-    games: "Elden Ring",
-  },
-  {
-    id: 4,
-    name: "Warhorse Studios",
-    founded: 2011,
-    games: "Kingdom Come Deliverance 2",
-  },
-];
+const pool = require("../db/pool");
 
-const getAllDevelopers = (req, res) => {
-  res.render("developers", { developers: developers });
+const getAllDevelopers = async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM developers");
+    res.render("developers", { developers: result.rows });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error");
+  }
 };
 
 const createDeveloperGet = (req, res) => {
@@ -37,10 +18,20 @@ const createDeveloperPost = (req, res) => {
   res.send("This should post the new Developer");
 };
 
-const getSingleDeveloper = (req, res) => {
+const getSingleDeveloper = async (req, res) => {
   const developerId = req.params.id;
-  const developer = developers[developerId];
-  res.render("singleDeveloper", { developer: developer });
+  try {
+    const result = await pool.query("SELECT * FROM developers WHERE id = $1", [developerId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).send("Developer not found");
+    }
+    const developer = result.rows[0];
+    res.render("singleDeveloper", { developer });
+  } catch (error) {
+    console.error("Error fetching game", error);
+    res.status(500).send("Server Error");
+  }
 };
 
 const editSingleDeveloper = (req, res) => {
