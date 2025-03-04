@@ -10,45 +10,32 @@ const getAllDevelopers = async (req, res) => {
   }
 };
 
-const createDeveloperGet = (req, res) => {
-  res.send("This will take me to the Developer Create Form");
-};
-
-const createDeveloperPost = (req, res) => {
-  res.send("This should post the new Developer");
-};
-
-const getSingleDeveloper = async (req, res) => {
-  const developerId = req.params.id;
+const getGamesByDeveloper = async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM developers WHERE id = $1", [developerId]);
+    const developerId = parseInt(req.params.id);
+    const developerResult = await pool.query("SELECT name FROM developers WHERE id = $1", [developerId]);
 
-    if (result.rows.length === 0) {
+    if (developerResult.rows.length === 0) {
       return res.status(404).send("Developer not found");
     }
-    const developer = result.rows[0];
-    res.render("singleDeveloper", { developer });
+
+    const gameResult = await pool.query(
+      "SELECT games.id, games.name, games.length, games.price FROM games JOIN game_developers ON games.id = game_developers.game_id WHERE game_developers.developer_id = $1",
+      [developerId]
+    );
+
+    res.render("developerGames", {
+      developer: developerResult.rows[0],
+      games: gameResult.rows,
+      messsage: gameResult.rows.length === 0 ? "No games found for this developer" : null,
+    });
   } catch (error) {
     console.error("Error fetching game", error);
     res.status(500).send("Server Error");
   }
 };
 
-const editSingleDeveloper = (req, res) => {
-  const developerId = req.params.id;
-  res.send(`This will edit Developer with ID: ${developerId}`);
-};
-
-const deleteSingleDeveloper = (req, res) => {
-  const developerId = req.params.id;
-  res.send(`This will delete Developer with ID: ${developerId}`);
-};
-
 module.exports = {
   getAllDevelopers,
-  createDeveloperGet,
-  createDeveloperPost,
-  getSingleDeveloper,
-  editSingleDeveloper,
-  deleteSingleDeveloper,
+  getGamesByDeveloper,
 };

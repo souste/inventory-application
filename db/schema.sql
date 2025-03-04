@@ -24,3 +24,9 @@ CREATE TABLE game_genres (
   game_id INTEGER REFERENCES games(id),
   genre_id INTEGER REFERENCES genres(id)
 );
+
+CREATE TABLE game_developers (
+  id SERIAL PRIMARY KEY,
+  game_id INTEGER REFERENCES games(id),
+  developer_id INTEGER REFERENCES developers(id)
+)

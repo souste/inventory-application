@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Games in Single Genre</title>
+    <title>Gamed made by Developer</title>
   </head>
   <body>
     <ul>
-      <% for (let i=0; i < games.length; i++) { %>
+      <% for (let i = 0; i < games.length ; i++) { %>
       <li>
         <h3><%= games[i].name %></h3>
         <p>Length: <%= games[i].length %> hours</p>
         <p>Price: £<%= games[i].price %></p>
-        <a href="/games/<%= games[i].id %>"><button>Open</button></a>
+        <a href="/games/<%= games[i].id %>">Open</a>
       </li>
-
       <% } %>
     </ul>
   </body>

@@ -37,6 +37,14 @@ const seedDB = async () => {
   (4, 1),
   (4, 4)
   `);
+    await pool.query(`
+  INSERT INTO game_developers (game_id, developer_id)
+  VALUES
+  (1, 1),
+  (2, 2),
+  (3, 3),
+  (4, 4)
+  `);
 
     console.log("Database Successfully Seeded");
   } catch (err) {
