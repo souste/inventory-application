@@ -14,8 +14,21 @@ const createGameGet = (req, res) => {
   res.render("createGame");
 };
 
-const createGamePost = (req, res) => {
-  res.send("This should post the new game");
+const createGamePost = async (req, res) => {
+  try {
+    const { name, length, meta_score, user_score, price } = req.body;
+
+    await pool.query(
+      `INSERT INTO games (name, length, meta_score, user_score, price)
+  VALUES ($1, $2, $3, $4, $5)`,
+      [name, length, meta_score || null, user_score || null, price]
+    );
+
+    res.redirect("/games");
+  } catch (error) {
+    console.error("Error adding game", error);
+    res.status(500).send("Server Error");
+  }
 };
 
 const getSingleGame = async (req, res) => {
