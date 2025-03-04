@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add a Game</title>
+  </head>
+  <body>
+    <h1>Add a Game</h1>
+    <form action="/create" method="POST">
+      <label for="name">Name: </label>
+      <input type="text" name="name" id="name" required />
+      <label for="length">Length (in hours):</label>
+      <input type="number" name="length" id="length" required />
+      <label for="meta_score">Meta Score:</label>
+      <input type="number" name="meta_score" id="meta_score" min="0" max="100" />
+      <label for="user_score">User Score:</label>
+      <input type="number" name="user_score" id="user_score" step="0.1" min="0" max="10" />
+      <label for="price">Price</label>
+      <input type="number" name="price" id="price" step="0.01" min="0" required />
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/"><button>Back to Home</button></a>
+  </body>
+</html>

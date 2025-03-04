@@ -11,7 +11,7 @@ const getAllGames = async (req, res) => {
 };
 
 const createGameGet = (req, res) => {
-  res.send("This will take me to the Game Create Form");
+  res.render("createGame");
 };
 
 const createGamePost = (req, res) => {
