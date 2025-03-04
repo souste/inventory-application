@@ -7,7 +7,8 @@ gameRouter.get("/", gameController.getAllGames);
 gameRouter.get("/create", gameController.createGameGet);
 gameRouter.post("/create", gameController.createGamePost);
 gameRouter.get("/:id", gameController.getSingleGame);
-gameRouter.get("/:id/edit", gameController.editSingleGame);
+gameRouter.get("/:id/update", gameController.updateGameGet);
+gameRouter.put("/:id/update", gameController.updateGamePut);
 gameRouter.delete("/:id", gameController.deleteSingleGame);
 
 module.exports = gameRouter;

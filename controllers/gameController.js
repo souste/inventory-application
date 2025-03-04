@@ -48,9 +48,26 @@ const getSingleGame = async (req, res) => {
   }
 };
 
-const editSingleGame = (req, res) => {
+const updateGameGet = async (req, res) => {
+  try {
+    const gameId = req.params.id;
+    const result = await pool.query("SELECT * FROM games WHERE id = $1", [gameId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).send("Game not found");
+    }
+
+    const game = result.rows[0];
+    res.render("updateGame", { game });
+  } catch (error) {
+    console.error("Error fetching game for update", error);
+    res.status(500).send("Server Error");
+  }
+};
+
+const updateGamePut = async (req, res) => {
   const gameId = req.params.id;
-  res.send(`This will edit game with ID: ${gameId}`);
+  res.render("updateGame");
 };
 
 const deleteSingleGame = (req, res) => {
@@ -63,6 +80,7 @@ module.exports = {
   createGameGet,
   createGamePost,
   getSingleGame,
-  editSingleGame,
+  updateGameGet,
+  updateGamePut,
   deleteSingleGame,
 };

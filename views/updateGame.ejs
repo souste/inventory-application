@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Game</title>
+  </head>
+  <body>
+    <h1>Edit Game</h1>
+    <form action="/games/<%= game.id %>/update" method="PUT">
+      <label for="name">Name: </label>
+      <input type="text" name="name" value="<%= game.name %>" required />
+      <label for="length">Length (in hours):</label>
+      <input type="number" name="length" value="<%= game.length %>" required />
+      <label for="meta_score">Meta Score:</label>
+      <input type="number" name="meta_score" value="<%= game.meta_score %>" min="0" max="100" />
+      <label for="user_score">User Score:</label>
+      <input type="number" name="user_score" value="<%= game.user_score %>" step="0.1" min="0" max="10" />
+      <label for="price">Price</label>
+      <input type="number" name="price" value="<%= game.price %>" step="0.01" min="0" required />
+      <button type="submit">Update Game</button>
+    </form>
+  </body>
+</html>
