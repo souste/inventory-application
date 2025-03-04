@@ -50,7 +50,7 @@ const getSingleGame = async (req, res) => {
 
 const updateGameGet = async (req, res) => {
   try {
-    const gameId = req.params.id;
+    const gameId = parseInt(req.params.id, 10);
     const result = await pool.query("SELECT * FROM games WHERE id = $1", [gameId]);
 
     if (result.rows.length === 0) {
@@ -66,8 +66,20 @@ const updateGameGet = async (req, res) => {
 };
 
 const updateGamePut = async (req, res) => {
-  const gameId = req.params.id;
-  res.render("updateGame");
+  try {
+    const gameId = parseInt(req.params.id, 10);
+    const { name, length, meta_score, user_score, price } = req.body;
+
+    await pool.query(
+      `UPDATE games 
+       SET name = $1, length = $2, meta_score = $3, user_score = $4, price = $5 WHERE id = $6`,
+      [name, length, meta_score || null, user_score || null, price, gameId]
+    );
+    res.redirect(`/games/${gameId}`);
+  } catch (error) {
+    console.error("Error updating game", error);
+    res.status(500).send("Server Error");
+  }
 };
 
 const deleteSingleGame = (req, res) => {

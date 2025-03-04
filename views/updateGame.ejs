@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>Edit Game</h1>
-    <form action="/games/<%= game.id %>/update" method="PUT">
+    <form action="/games/<%= game.id %>/update?_method=PUT" method="POST">
       <label for="name">Name: </label>
       <input type="text" name="name" value="<%= game.name %>" required />
       <label for="length">Length (in hours):</label>
@@ -20,5 +20,6 @@
       <input type="number" name="price" value="<%= game.price %>" step="0.01" min="0" required />
       <button type="submit">Update Game</button>
     </form>
+    <a href="/"><button>Back to Home</button></a>
   </body>
 </html>
