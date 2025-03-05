@@ -82,9 +82,16 @@ const updateGamePut = async (req, res) => {
   }
 };
 
-const deleteSingleGame = (req, res) => {
-  const gameId = req.params.id;
-  res.send(`This will delete game with ID: ${gameId}`);
+const deleteSingleGame = async (req, res) => {
+  try {
+    const gameId = parseInt(req.params.id, 10);
+
+    await pool.query("DELETE FROM games WHERE ID = $1", [gameId]);
+    res.redirect("/games");
+  } catch (error) {
+    console.error("Error deleting game", error);
+    res.status(500).send("Server error");
+  }
 };
 
 module.exports = {
