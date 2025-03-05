@@ -16,12 +16,26 @@ const createGameGet = (req, res) => {
 
 const createGamePost = async (req, res) => {
   try {
-    const { name, length, meta_score, user_score, price } = req.body;
+    const { name, length, meta_score, user_score, price, developer, genre } = req.body;
+
+    const result = await pool.query(
+      `INSERT INTO games (name, length, meta_score, user_score, price)
+  VALUES ($1, $2, $3, $4, $5) RETURNING id`,
+      [name, length, meta_score || null, user_score || null, price]
+    );
+
+    const gameId = result.rows[0].id;
 
     await pool.query(
-      `INSERT INTO games (name, length, meta_score, user_score, price)
-  VALUES ($1, $2, $3, $4, $5)`,
-      [name, length, meta_score || null, user_score || null, price]
+      `INSERT INTO game_developers (game_id, developer_id)
+       VALUES ($1, $2)`,
+      [gameId, developer]
+    );
+
+    await pool.query(
+      `INSERT INTO game_genres (game_id, genre_id)
+      VALUES ($1, $2)`,
+      [gameId, genre]
     );
 
     res.redirect("/games");

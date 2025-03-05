@@ -16,15 +16,17 @@ const seedDB = async () => {
             ('Rockstar Games', 1998),
             ('Larian Studios', 1996),
             ('FromSoftware', 1986),
-            ('Warhorse Studios', 2011);
+            ('Warhorse Studios', 2011),
+            ('Other', 0000);
             `);
     await pool.query(`
         INSERT INTO genres (name, description)
         VALUES
-            ('Fantasy', 'Sword and Sorcery'),
-            ('Open World', 'With world map, can go anywhere'),
-            ('Driving', 'Racing, driving around in a car'),
-            ('Action', 'Hacking and Slashing');
+            ('FANTASY', 'Sword and Sorcery'),
+            ('OPEN WORLD', 'With world map, can go anywhere'),
+            ('DRIVING', 'Racing, driving around in a car'),
+            ('ACTION', 'Hacking and Slashing'),
+            ('OTHER', 'Everything Else');
             `);
     await pool.query(`
   INSERT INTO game_genres (game_id, genre_id)
