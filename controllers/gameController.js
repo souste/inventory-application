@@ -135,7 +135,13 @@ const deleteSingleGame = async (req, res) => {
   try {
     const gameId = parseInt(req.params.id, 10);
 
+    // need to delete from junction tables first
+    await pool.query("DELETE FROM game_genres WHERE game_id = $1", [gameId]);
+
+    await pool.query("DELETE FROM game_developers WHERE game_id = $1", [gameId]);
+
     await pool.query("DELETE FROM games WHERE ID = $1", [gameId]);
+
     res.redirect("/games");
   } catch (error) {
     console.error("Error deleting game", error);
