@@ -82,13 +82,48 @@ const updateGameGet = async (req, res) => {
 const updateGamePut = async (req, res) => {
   try {
     const gameId = parseInt(req.params.id, 10);
-    const { name, length, meta_score, user_score, price } = req.body;
+    const { name, length, meta_score, user_score, price, developer, genre } = req.body;
 
     await pool.query(
       `UPDATE games 
        SET name = $1, length = $2, meta_score = $3, user_score = $4, price = $5 WHERE id = $6`,
       [name, length, meta_score || null, user_score || null, price, gameId]
     );
+
+    const devCheck = await pool.query(`SELECT * FROM game_developers WHERE game_id = $1`, [gameId]);
+
+    if (devCheck.rows.length > 0) {
+      await pool.query(
+        `UPDATE game_developers
+          SET developer_id = $1
+          WHERE game_id = $2`,
+        [developer, gameId]
+      );
+    } else {
+      await pool.query(
+        `INSERT INTO game_developers (game_id, developer_id)
+      VALUES ($1, $2)`,
+        [gameId, developer]
+      );
+    }
+
+    const genreCheck = await pool.query(`SELECT * FROM game_genres WHERE game_id = $1`, [gameId]);
+
+    if (genreCheck.rows.length > 0) {
+      await pool.query(
+        `UPDATE game_genres
+        SET genre_id = $1
+        WHERE game_id = $2`,
+        [genre, gameId]
+      );
+    } else {
+      await pool.query(
+        `INSERT INTO game_genres (game_id, genre_id)
+        VALUES ($1, $2)`,
+        [gameId, genre]
+      );
+    }
+
     res.redirect(`/games/${gameId}`);
   } catch (error) {
     console.error("Error updating game", error);
